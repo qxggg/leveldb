@@ -146,7 +146,7 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "ctest.advertisement.all.test.configuration.is.created": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "develop",
     "last_opened_file_path": "/Users/xingeqi/CLionProjects/leveldb/db",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
