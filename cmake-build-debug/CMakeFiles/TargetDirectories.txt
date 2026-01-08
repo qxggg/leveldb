@@ -5,6 +5,7 @@
 /Users/xingeqi/CLionProjects/leveldb/cmake-build-debug/CMakeFiles/env_posix_test.dir
 /Users/xingeqi/CLionProjects/leveldb/cmake-build-debug/CMakeFiles/db_bench.dir
 /Users/xingeqi/CLionProjects/leveldb/cmake-build-debug/CMakeFiles/db_bench_sqlite3.dir
+/Users/xingeqi/CLionProjects/leveldb/cmake-build-debug/CMakeFiles/multidisk_test.dir
 /Users/xingeqi/CLionProjects/leveldb/cmake-build-debug/CMakeFiles/test.dir
 /Users/xingeqi/CLionProjects/leveldb/cmake-build-debug/CMakeFiles/edit_cache.dir
 /Users/xingeqi/CLionProjects/leveldb/cmake-build-debug/CMakeFiles/rebuild_cache.dir

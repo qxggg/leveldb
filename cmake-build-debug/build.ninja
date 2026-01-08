@@ -49,6 +49,14 @@ cmake_ninja_workdir = /Users/xingeqi/CLionProjects/leveldb/cmake-build-debug/
 
 build cmake_object_order_depends_target_leveldb: phony || .
 
+build CMakeFiles/leveldb.dir/test/test.cc.o: CXX_COMPILER__leveldb_unscanned_Debug /Users/xingeqi/CLionProjects/leveldb/test/test.cc || cmake_object_order_depends_target_leveldb
+  DEFINES = -DLEVELDB_COMPILE_LIBRARY -DLEVELDB_PLATFORM_POSIX=1
+  DEP_FILE = CMakeFiles/leveldb.dir/test/test.cc.o.d
+  FLAGS = -fno-exceptions -fno-rtti -g -std=c++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -fcolor-diagnostics -Werror -Wthread-safety
+  INCLUDES = -I/Users/xingeqi/CLionProjects/leveldb/cmake-build-debug/include -I/Users/xingeqi/CLionProjects/leveldb/. -I/Users/xingeqi/CLionProjects/leveldb/include
+  OBJECT_DIR = CMakeFiles/leveldb.dir
+  OBJECT_FILE_DIR = CMakeFiles/leveldb.dir/test
+
 build CMakeFiles/leveldb.dir/db/builder.cc.o: CXX_COMPILER__leveldb_unscanned_Debug /Users/xingeqi/CLionProjects/leveldb/db/builder.cc || cmake_object_order_depends_target_leveldb
   DEFINES = -DLEVELDB_COMPILE_LIBRARY -DLEVELDB_PLATFORM_POSIX=1
   DEP_FILE = CMakeFiles/leveldb.dir/db/builder.cc.o.d
@@ -361,7 +369,7 @@ build CMakeFiles/leveldb.dir/helpers/memenv/memenv.cc.o: CXX_COMPILER__leveldb_u
 #############################################
 # Link the static library libleveldb.a
 
-build libleveldb.a: CXX_STATIC_LIBRARY_LINKER__leveldb_Debug CMakeFiles/leveldb.dir/db/builder.cc.o CMakeFiles/leveldb.dir/db/c.cc.o CMakeFiles/leveldb.dir/db/db_impl.cc.o CMakeFiles/leveldb.dir/db/db_iter.cc.o CMakeFiles/leveldb.dir/db/dbformat.cc.o CMakeFiles/leveldb.dir/db/dumpfile.cc.o CMakeFiles/leveldb.dir/db/filename.cc.o CMakeFiles/leveldb.dir/db/log_reader.cc.o CMakeFiles/leveldb.dir/db/log_writer.cc.o CMakeFiles/leveldb.dir/db/memtable.cc.o CMakeFiles/leveldb.dir/db/repair.cc.o CMakeFiles/leveldb.dir/db/table_cache.cc.o CMakeFiles/leveldb.dir/db/version_edit.cc.o CMakeFiles/leveldb.dir/db/version_set.cc.o CMakeFiles/leveldb.dir/db/write_batch.cc.o CMakeFiles/leveldb.dir/table/block_builder.cc.o CMakeFiles/leveldb.dir/table/block.cc.o CMakeFiles/leveldb.dir/table/filter_block.cc.o CMakeFiles/leveldb.dir/table/format.cc.o CMakeFiles/leveldb.dir/table/iterator.cc.o CMakeFiles/leveldb.dir/table/merger.cc.o CMakeFiles/leveldb.dir/table/table_builder.cc.o CMakeFiles/leveldb.dir/table/table.cc.o CMakeFiles/leveldb.dir/table/two_level_iterator.cc.o CMakeFiles/leveldb.dir/util/arena.cc.o CMakeFiles/leveldb.dir/util/bloom.cc.o CMakeFiles/leveldb.dir/util/cache.cc.o CMakeFiles/leveldb.dir/util/coding.cc.o CMakeFiles/leveldb.dir/util/comparator.cc.o CMakeFiles/leveldb.dir/util/crc32c.cc.o CMakeFiles/leveldb.dir/util/env.cc.o CMakeFiles/leveldb.dir/util/filter_policy.cc.o CMakeFiles/leveldb.dir/util/hash.cc.o CMakeFiles/leveldb.dir/util/logging.cc.o CMakeFiles/leveldb.dir/util/options.cc.o CMakeFiles/leveldb.dir/util/status.cc.o CMakeFiles/leveldb.dir/util/env_posix.cc.o CMakeFiles/leveldb.dir/helpers/memenv/memenv.cc.o
+build libleveldb.a: CXX_STATIC_LIBRARY_LINKER__leveldb_Debug CMakeFiles/leveldb.dir/test/test.cc.o CMakeFiles/leveldb.dir/db/builder.cc.o CMakeFiles/leveldb.dir/db/c.cc.o CMakeFiles/leveldb.dir/db/db_impl.cc.o CMakeFiles/leveldb.dir/db/db_iter.cc.o CMakeFiles/leveldb.dir/db/dbformat.cc.o CMakeFiles/leveldb.dir/db/dumpfile.cc.o CMakeFiles/leveldb.dir/db/filename.cc.o CMakeFiles/leveldb.dir/db/log_reader.cc.o CMakeFiles/leveldb.dir/db/log_writer.cc.o CMakeFiles/leveldb.dir/db/memtable.cc.o CMakeFiles/leveldb.dir/db/repair.cc.o CMakeFiles/leveldb.dir/db/table_cache.cc.o CMakeFiles/leveldb.dir/db/version_edit.cc.o CMakeFiles/leveldb.dir/db/version_set.cc.o CMakeFiles/leveldb.dir/db/write_batch.cc.o CMakeFiles/leveldb.dir/table/block_builder.cc.o CMakeFiles/leveldb.dir/table/block.cc.o CMakeFiles/leveldb.dir/table/filter_block.cc.o CMakeFiles/leveldb.dir/table/format.cc.o CMakeFiles/leveldb.dir/table/iterator.cc.o CMakeFiles/leveldb.dir/table/merger.cc.o CMakeFiles/leveldb.dir/table/table_builder.cc.o CMakeFiles/leveldb.dir/table/table.cc.o CMakeFiles/leveldb.dir/table/two_level_iterator.cc.o CMakeFiles/leveldb.dir/util/arena.cc.o CMakeFiles/leveldb.dir/util/bloom.cc.o CMakeFiles/leveldb.dir/util/cache.cc.o CMakeFiles/leveldb.dir/util/coding.cc.o CMakeFiles/leveldb.dir/util/comparator.cc.o CMakeFiles/leveldb.dir/util/crc32c.cc.o CMakeFiles/leveldb.dir/util/env.cc.o CMakeFiles/leveldb.dir/util/filter_policy.cc.o CMakeFiles/leveldb.dir/util/hash.cc.o CMakeFiles/leveldb.dir/util/logging.cc.o CMakeFiles/leveldb.dir/util/options.cc.o CMakeFiles/leveldb.dir/util/status.cc.o CMakeFiles/leveldb.dir/util/env_posix.cc.o CMakeFiles/leveldb.dir/helpers/memenv/memenv.cc.o
   ARCH_FLAGS = -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk
   LANGUAGE_COMPILE_FLAGS = -fno-exceptions -fno-rtti -g
   OBJECT_DIR = CMakeFiles/leveldb.dir
@@ -804,6 +812,39 @@ build db_bench_sqlite3: CXX_EXECUTABLE_LINKER__db_bench_sqlite3_Debug CMakeFiles
   PRE_LINK = :
   TARGET_FILE = db_bench_sqlite3
   TARGET_PDB = db_bench_sqlite3.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target multidisk_test
+
+
+#############################################
+# Order-only phony target for multidisk_test
+
+build cmake_object_order_depends_target_multidisk_test: phony || cmake_object_order_depends_target_leveldb
+
+build CMakeFiles/multidisk_test.dir/test/test.cc.o: CXX_COMPILER__multidisk_test_unscanned_Debug /Users/xingeqi/CLionProjects/leveldb/test/test.cc || cmake_object_order_depends_target_multidisk_test
+  DEP_FILE = CMakeFiles/multidisk_test.dir/test/test.cc.o.d
+  FLAGS = -fno-exceptions -fno-rtti -g -std=c++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -fcolor-diagnostics -Werror -Wthread-safety
+  INCLUDES = -I/Users/xingeqi/CLionProjects/leveldb/cmake-build-debug/include -I/Users/xingeqi/CLionProjects/leveldb/. -I/Users/xingeqi/CLionProjects/leveldb/include
+  OBJECT_DIR = CMakeFiles/multidisk_test.dir
+  OBJECT_FILE_DIR = CMakeFiles/multidisk_test.dir/test
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target multidisk_test
+
+
+#############################################
+# Link the executable multidisk_test
+
+build multidisk_test: CXX_EXECUTABLE_LINKER__multidisk_test_Debug CMakeFiles/multidisk_test.dir/test/test.cc.o | libleveldb.a || libleveldb.a
+  FLAGS = -fno-exceptions -fno-rtti -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk
+  LINK_LIBRARIES = libleveldb.a
+  OBJECT_DIR = CMakeFiles/multidisk_test.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = multidisk_test
+  TARGET_PDB = multidisk_test.dbg
 
 
 #############################################
@@ -1673,7 +1714,7 @@ build libgtestd.a: phony lib/libgtestd.a
 #############################################
 # Folder: /Users/xingeqi/CLionProjects/leveldb/cmake-build-debug
 
-build all: phony libleveldb.a leveldbutil leveldb_tests c_test env_posix_test db_bench db_bench_sqlite3 third_party/googletest/all third_party/benchmark/all
+build all: phony libleveldb.a leveldbutil leveldb_tests c_test env_posix_test db_bench db_bench_sqlite3 multidisk_test third_party/googletest/all third_party/benchmark/all
 
 # =============================================================================
 

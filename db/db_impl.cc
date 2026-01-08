@@ -353,11 +353,38 @@ Status DBImpl::Recover(VersionEdit* edit, bool* save_manifest) {
         logs.push_back(number);
     }
   }
+
+  // In multi-disk mode, table files may live under Options::data_dirs instead of
+  // the metadata directory (dbname_). Scan all configured data directories and
+  // mark any live file numbers as present.
+  if (options_.enable_multi_disk) {
+    for (const std::string& dir : options_.data_dirs) {
+      std::vector<std::string> dfiles;
+      Status ds = env_->GetChildren(dir, &dfiles);
+      if (!ds.ok()) {
+        return ds;
+      }
+      for (size_t j = 0; j < dfiles.size(); j++) {
+        if (ParseFileName(dfiles[j], &number, &type)) {
+          expected.erase(number);
+        }
+      }
+    }
+  }
+
   if (!expected.empty()) {
     char buf[50];
     std::snprintf(buf, sizeof(buf), "%d missing files; e.g.",
                   static_cast<int>(expected.size()));
-    return Status::Corruption(buf, TableFileName(dbname_, *(expected.begin())));
+    const uint64_t missing = *(expected.begin());
+    std::string missing_path = TableFileName(dbname_, missing);
+    if (options_.enable_multi_disk && !options_.data_dirs.empty()) {
+      // Point to the most likely location for this file number.
+      const size_t n = options_.data_dirs.size();
+      const size_t start = static_cast<size_t>(missing % n);
+      missing_path = TableFileName(options_.data_dirs[start], missing);
+    }
+    return Status::Corruption(buf, missing_path);
   }
 
   // Recover in the order in which the logs were generated
