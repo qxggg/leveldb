@@ -1502,6 +1502,38 @@ DB::~DB() = default;
 Status DB::Open(const Options& options, const std::string& dbname, DB** dbptr) {
   *dbptr = nullptr;
 
+  // Stage 1: Multi-disk bootstrap.
+  // Create configured data directories (if any) early so later file creation
+  // doesn't fail with "No such file or directory".
+  if (options.enable_multi_disk) {
+    if (options.data_dirs.empty()) {
+      return Status::InvalidArgument(
+          "enable_multi_disk requires non-empty Options::data_dirs");
+    }
+    if (options.replication_factor < 1) {
+      return Status::InvalidArgument(
+          "replication_factor must be >= 1 when enable_multi_disk is true");
+    }
+    if (options.replication_factor > options.data_dirs.size()) {
+      return Status::InvalidArgument(
+          "replication_factor must be <= data_dirs.size() when enable_multi_disk is true");
+    }
+    for (const std::string& dir : options.data_dirs) {
+      if (dir.empty()) {
+        return Status::InvalidArgument(
+            "Options::data_dirs contains an empty path");
+      }
+      // LevelDB Env does not provide CreateDirIfMissing(). Emulate it with
+      // FileExists() + CreateDir() and a re-check to tolerate races.
+      if (!options.env->FileExists(dir)) {
+        Status ds = options.env->CreateDir(dir);
+        if (!ds.ok() && !options.env->FileExists(dir)) {
+          return ds;
+        }
+      }
+    }
+  }
+
   DBImpl* impl = new DBImpl(options, dbname);
   impl->mutex_.Lock();
   VersionEdit edit;

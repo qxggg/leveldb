@@ -6,6 +6,9 @@
 #define STORAGE_LEVELDB_INCLUDE_OPTIONS_H_
 
 #include <cstddef>
+#include <cstdint>
+#include <string>
+#include <vector>
 
 #include "leveldb/export.h"
 
@@ -145,6 +148,28 @@ struct LEVELDB_EXPORT Options {
   // Many applications will benefit from passing the result of
   // NewBloomFilterPolicy() here.
   const FilterPolicy* filter_policy = nullptr;
+
+  // -------------------
+  // Experimental: single-instance multi-directory (multi-disk) mode.
+  //
+  // When enabled, SST files (.ldb/.sst) may be placed under one of the
+  // directories listed in data_dirs. MANIFEST/WAL/CURRENT remain under the
+  // main DB directory (the `dbname` passed to DB::Open).
+  //
+  // NOTE: For the first stages of the multi-disk feature, read-path support
+  // will search data_dirs first and fall back to the main DB directory.
+
+  // Enable single-instance multi-disk mode.
+  bool enable_multi_disk = false;
+
+  // Directories used to store SST files. Entries may be absolute or relative
+  // paths. The implementation will create them if missing.
+  std::vector<std::string> data_dirs;
+
+  // Replication factor for SST files across data_dirs. 1 means no replication.
+  // For safety, replication_factor must be in [1, data_dirs.size()] when
+  // enable_multi_disk is true.
+  uint32_t replication_factor = 1;
 };
 
 // Options that control read operations
